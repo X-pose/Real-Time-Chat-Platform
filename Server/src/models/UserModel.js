@@ -6,11 +6,7 @@
 const mongoose = require('mongoose')
 
 const messageSchema = new mongoose.Schema({
-    senderId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: false
-    },
+ 
     message: {
       type: String,
       required: false
@@ -26,14 +22,21 @@ const messageSchema = new mongoose.Schema({
     }
   });
 
+const conversationSchema = new mongoose.Schema({
+  
+  messages: [messageSchema],
+  createdAt:{type : Date, default: Date.now},
+  updatedAt : {type : Date, default: Date.now}
+})
+
 const userSchema = new mongoose.Schema({
-    username: { type: String, required: true, unique: true },
+
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     type : {type : String, enum : ['client', 'admin']},
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-    messages: [messageSchema]
+    conversations : [conversationSchema]
   },{collection : 'User'})
 
 //Creating mongoose model using Schema

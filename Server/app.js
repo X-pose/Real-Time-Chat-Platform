@@ -13,8 +13,7 @@ const { authenticateRequest } = require("./utilis/requestAuthenticator");
 
 //Requires - Route classes 
 const authRoutes = require('./src/routes/authRoutes')
-const userRoutes = require('./src/routes/userRoutes')
-const tokenRoutes = require('./src/routes/tokenRoutes')
+
 
 //Establishing MongoDB connection
 connectDB.getInstance()
@@ -27,8 +26,7 @@ app.use('/', appRouter)
 
 //Set routes
 app.use('/api/auth', authRoutes)
-app.use('/api/users', userRoutes)
-app.use('/api/token', tokenRoutes)
+
 
 //Exporting app to be used by the server.js
 module.exports = app
