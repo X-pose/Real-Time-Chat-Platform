@@ -33,7 +33,7 @@ const io = new Server(httpServer, {
   });
   
   io.on("connection", (socket) => {
-    console.log("Socket is live and connected");
+    console.log("User " + socket.id + " connected");
     socketController(socket, io);
   });
   

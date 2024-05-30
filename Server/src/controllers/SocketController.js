@@ -1,13 +1,24 @@
+const {getBotResponse} = require("../controllers/OpenAIController")
 module.exports = (socket, io) => {
     socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
+        console.log("user "+socket.id+" disconnected")
+    })
 
-    // Add your custom events here
-    socket.on('chat message', (msg) => {
+    const getReply = async(msg)=> {
+        //Getting openAI response for the chat
+       // const reply = await getBotResponse(msg)
+        return reply
+    }
+
+    
+    socket.on ('chat message', async(msg) => {
         console.log('message: ' + msg)
-        socket.emit('chat message', `Server received your message: ${msg}`); // Broadcast message to all connected clients
-    });
 
-    // Add more event handlers as needed
-};
+        //const reply = await getReply(msg)
+
+        socket.emit('chat message', msg)
+        socket.emit('bot message', "reply msg")
+    })
+
+  
+}
