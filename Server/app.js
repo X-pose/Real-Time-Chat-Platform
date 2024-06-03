@@ -8,33 +8,57 @@ const cors = require('cors')
 const http = require('http')
 const {Server} = require('socket.io')
 const logger = require('./config/logger')
-const socketController = require('./src/controllers/SocketController')
+const chatRealTimeController = require('./src/controllers/ChatRealTimeController')
 const appRouter = AppExpress.Router()
 const connectDB = require('./config/database')
 const { applyRateLimiter } = require("./utilis/rateLimiter")
+const jwt = require('jsonwebtoken')
 const { authenticateRequest } = require("./utilis/requestAuthenticator")
 require('dotenv').config()
 
-// Create an instance of Express
+// Creating an instance of Express
 const app = AppExpress()
-const port = process.env.PORT || 4000 // Ensure a default port is set
+const port = process.env.PORT || 4000 //A default port is set provided as a fail-safe
 
-// Create HTTP server
+// Creating HTTP server
 const httpServer = http.createServer(app)
 
 // Enable cross-origin requests
 app.use(cors())
 
+// Creating a web socket for httpServer with socket.io
 const io = new Server(httpServer, {
     cors: {
       origin: "*",
       methods: ["GET", "POST"],
     },
   });
+
+  io.use((socket, next) => {
+    // Get the token from the socket handshake headers
+    const token = socket.handshake.headers.authorization?.split(' ')[1];
+    
+    if (!token) {
+      return next(new Error('Missing token'));
+    }
   
+    // Verify the token
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+      if (err) {
+        console.log(err.message);
+        
+        return next(new Error('Invalid token'));
+      }
+      // Attach the decoded user info to the socket object
+      socket.user = decoded;
+      next();
+    });
+  });
+  
+  // On create 
   io.on("connection", (socket) => {
     console.log("User " + socket.id + " connected");
-    socketController(socket, io);
+    chatRealTimeController(socket, io);
   });
   
 
@@ -49,10 +73,10 @@ app.use('/', appRouter)
 
 // Requires - Route classes
 const authRoutes = require('./src/routes/authRoutes')
-const SocketController = require('./src/controllers/SocketController')
+
 
 // Set routes
-app.use('/api/auth', authRoutes)
+app.use('/api/auth',applyRateLimiter, authRoutes)
 
 // Error handling for the server
 httpServer.on('error', (error) => {

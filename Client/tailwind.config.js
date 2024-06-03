@@ -6,7 +6,11 @@ export default {
   ],
   theme: {
     extend: {
-      
+      fontFamily: {
+        FuturaMdBt :['FuturaMdBt', 'sans'],
+        FutuBd : ['FutuBd', 'sans']
+        
+      },
     },
   },
   plugins: [],

@@ -1,57 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import io from 'socket.io-client'
+import React from 'react'
+import {Route , Routes , BrowserRouter as Router} from 'react-router-dom'
 
-const socket = io('http://localhost:4000') // Ensure this URL matches your server
+import AuthenticationPage from './pages/authenticationPage'
+import ChatPage from './pages/chatPage'
+
 
 function App() {
-    const [message, setMessage] = useState('')
-    const [messages, setMessages] = useState([])
-   
-
-    useEffect(() => {
-        socket.on('chat message', (msg) => {
-            setMessages((prevMessages) => [...prevMessages, msg])
-        })
-        socket.on('bot message', (botMsg) =>{
-            setMessages((prevBotMessages) => [...prevBotMessages, botMsg])
-        })
-
-        return () => {
-            socket.off('chat message')
-        }
-    }, [])
-
-    const sendMessage = (e) => {
-        e.preventDefault()
-        if (message) {
-            socket.emit('chat message', message)
-            setMessage('')
-        }
-    }
-
-    return (
-        <div className=" bg-slate-800 w-screen h-screen flex justify-center items-center">
-          <div className=' bg-slate-400'>
-          <ul id="messages">
-                {messages.map((msg, index) => (
-                    <li key={index} className=' bg-white px-10 py-1 rounded my-2'>{msg}</li>
-                ))}
-            </ul>
-           
-          </div>
-           
-
-            <form id="form" onSubmit={sendMessage}>
-                <input
-                    id="input"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    autoComplete="off"
-                />
-                <button>Send</button>
-            </form>
-        </div>
-    )
+ 
+  return (
+    <Router>
+      <Routes>
+      
+        <Route path ="/" element = {<AuthenticationPage/>} />
+        <Route path ="/chat" element = {<ChatPage/>} />
+       
+      </Routes>
+    </Router>
+  )
 }
 
 export default App

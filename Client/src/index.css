@@ -1,3 +1,13 @@
+@font-face {
+  font-family: FuturaMdBt;
+  src: url("./assets/FuturaMediumBT.ttf");
+}
+
+@font-face {
+  font-family: FutuBd;
+  src: url("./assets/FutuBd.ttf");
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
