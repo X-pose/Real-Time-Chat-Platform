@@ -10,8 +10,15 @@ module.exports = (socket, io) => {
 
     const getReply = async(msg)=> {
         //Getting openAI response for the chat
-       // const reply = await getBotResponse(msg)
-       const reply = 'bot: server reply'+msg
+        let reply
+
+        reply = await getBotResponse(msg)
+
+        //If there's an error, echo back client msg with error contex
+        if(reply === "Failed to parse response from OpenAI API"){
+            reply = 'bot: Failed to get a server reply to : '+msg
+        }
+    
         return reply
     }
 

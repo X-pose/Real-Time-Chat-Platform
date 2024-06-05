@@ -19,9 +19,11 @@ exports.getBotResponse = async (msg) => {
   `
 
   try {
+    console.log("Get bot response runnign")
     const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo-16k-0613",
         messages: [],
+        prompt:prompt,
         temperature: 1,
         max_tokens: 256,
         top_p: 1,
@@ -36,13 +38,13 @@ exports.getBotResponse = async (msg) => {
       parsedResponse = JSON.parse(parsableJSONresponse)
     } catch (error) {
       console.error("Error parsing JSON response:", error)
-      throw new Error("Failed to parse response from OpenAI API")
+      return "Failed to parse response from OpenAI API"
     }
 
     console.log("Bot response:", parsedResponse.botResponse)
     return parsedResponse.botResponse
   } catch (error) {
     console.error("Error getting response from OpenAI API:", error)
-    throw new Error("Failed to get response from OpenAI API")
+    return "Failed to parse response from OpenAI API"
   }
 }
