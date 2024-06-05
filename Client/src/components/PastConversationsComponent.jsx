@@ -60,7 +60,7 @@ export default function PastConversationsComponent({ getMessages }) {
                 <IoChatbubblesOutline className=' size-5' />
               </ListItemIcon>
 
-              <ListItemText primary={messages.messages[0].message} style={{maxWidth:'200px',overflow:'hidden'}} />
+              <ListItemText primary={messages.messages[0].message} style={{minWidth:'200px',maxWidth:'250px',overflow:'hidden'}} />
 
             </ListItemButton>
             <Divider />

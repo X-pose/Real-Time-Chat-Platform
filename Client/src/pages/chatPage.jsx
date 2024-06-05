@@ -162,7 +162,7 @@ function ChatPage() {
 
 
     const drawer = (
-        <Box sx={{ backgroundColor: "rgb(224 224 224)", height: '100vh' }}>
+        <Box sx={{ backgroundColor: "rgb(224 224 224)", height: '100vh', minWidth:'250px' }}>
             <Toolbar >
                 <Typography variant='h5' font-bold fontWeight={600} >Chat History</Typography>
 
