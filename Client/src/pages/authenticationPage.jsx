@@ -8,13 +8,13 @@ function AuthenticationPage(){
 
 
     const toggleView = () => {
-      setShowLogin(!showLogin);
-    };
+      setShowLogin(!showLogin)
+    }
     
     
   
     return (
-        <div className='w-screen h-screen flex justify-center bg-slate-500 overflow-hidden'>
+        <div className='w-screen h-screen flex justify-center bg-gray-100 overflow-hidden'>
     
           <div className="  w-screen h-screen flex justify-center items-center flex-col">
             {showLogin ?

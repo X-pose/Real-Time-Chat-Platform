@@ -41,6 +41,8 @@ exports.verifyToken = async (req) => {
 //Regenerate a new access token
 exports.generateNewAccessToken = (req,res) => {
 
+    
+
     const token = req.headers.authorization && req.headers.authorization.split(' ')[1]
 
      //Checks for missing tokens

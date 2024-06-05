@@ -3,8 +3,9 @@ const {addBotMsg,addClientMsg,saveConversation} = require('../controllers/ChatSt
 
 
 module.exports = (socket, io) => {
-    socket.on('disconnect', () => {
+    socket.on('disconnect', async() => {
         console.log("user "+socket.id+" disconnected")
+       await saveConversation(socket.user.userId)
     })
 
     const getReply = async(msg)=> {
@@ -17,7 +18,8 @@ module.exports = (socket, io) => {
     
     socket.on ('chat message', async(msg) => {
 
-        console.log('message: ' + msg + 'From : ' + socket.user)
+        console.log('message: ' + msg + 'From : ' + socket.user.userId)
+
         addClientMsg(msg)
         const reply = await getReply(msg)
         addBotMsg(reply)

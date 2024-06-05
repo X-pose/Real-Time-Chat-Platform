@@ -1,4 +1,6 @@
 const userModel = require("../models/UserModel");
+const HttpStatus = require('../enums/httpStatus')
+const logger = require('../../config/logger')
 
 let msgQueue = [];
 
@@ -36,19 +38,36 @@ exports.saveConversation = async (clientID) => {
         updatedAt: Date.now() 
     };
 
-    try {
-        // Append the new conversation to the existing conversations array
-        const updatedConversation = await userModel.findByIdAndUpdate(
-            clientID,
-            { $push: { conversations: conversation } },
-            { new: true } // return the updated document
-        );
-
-        console.log(updatedConversation);
-
-        // Clear the msgQueue after saving the conversation
-        msgQueue = [];
-    } catch (error) {
-        console.log(error);
+    if(msgQueue.length > 1){
+        try {
+            // Append the new conversation to the existing conversations array
+            const updatedConversation = await userModel.findByIdAndUpdate(
+                clientID,
+                { $push: { conversations: conversation } },
+                { new: true } // return the updated document
+            );
+    
+            console.log(updatedConversation);
+    
+            // Clear the msgQueue after saving the conversation
+            msgQueue = [];
+        } catch (error) {
+            console.log(error);
+        }
     }
+    
 };
+
+exports.getConversations = async(userID, res) => {
+    
+    try {
+        const userDetails =  await userModel.findById(userID)
+
+        const conversationList = userDetails.conversations
+
+        res.status(HttpStatus.OK).json(conversationList)
+    } catch (error) {
+        logger.logsInto.error(error)
+        console.log(error)
+    }
+}

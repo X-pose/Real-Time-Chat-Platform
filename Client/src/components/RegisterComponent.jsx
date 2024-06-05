@@ -3,8 +3,11 @@
  */
 //Imports
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+
 
 export default function Registration({ toggleView }) {
 
@@ -93,57 +96,57 @@ export default function Registration({ toggleView }) {
 
     return (
         <div className='w-fit h-fit sm:w-3/6 md:w-[400px] '>
-            <div className=' w-fit h-fit text-white flex flex-col justify-start items-start'>
+            <div className=' w-fit h-fit text-[#252525] flex flex-col justify-start items-start'>
                 <span className=' font-FutuBd font-bold text-4xl'>Register Now!</span>
             </div>
             <div>
                 <form onSubmit={handleRegSubmit}>
                     <div className='w-full'>
-                        <input className='placeholder-[#083F46] ::placeholder font-FuturaMdBt w-[calc(100vw-2.5rem)] sm:w-full h-10 pl-10 mt-10 bg-white font-normal text-[#083F46] rounded-3xl'
+                        <TextField className=' placeholder-[#083F46] ::placeholder font-FuturaMdBt w-[calc(100vw-2.5rem)] sm:w-full  mt-5 bg-white font-normal text-[#083F46] rounded-lg'
                             type="email"
                             id="email"
                             name="email"
                             value={email}
                             onChange={handleEmailChange}
-                            placeholder='e-mail'
+                            label='Email'
                             required
                         />
 
                     </div>
                     <div className='w-full' >
-                        <input className='placeholder-[#083F46] ::placeholder font-FuturaMdBt w-[calc(100vw-2.5rem)] sm:w-full h-10 pl-10 mt-5 bg-white font-normal text-[#083F46] rounded-3xl'
+                        <TextField className=' placeholder-[#083F46] ::placeholder font-FuturaMdBt w-[calc(100vw-2.5rem)] sm:w-full  mt-5 bg-white font-normal text-[#083F46] rounded-lg'
                             type="password"
                             id="password"
                             name="password"
                             value={password}
                             onChange={handlePasswordChange}
 
-                            placeholder='create password'
+                            label='Password'
                             required
                         />
                         {passwordError && <p className=" text-red-500">{passwordError}</p>}
                     </div>
                     <div  className='w-full'>
-                        <input className='placeholder-[#083F46] ::placeholder font-FuturaMdBt w-[calc(100vw-2.5rem)] sm:w-full h-10 pl-10 mt-5 bg-white font-normal text-[#083F46] rounded-3xl'
+                        <TextField className=' placeholder-[#083F46] ::placeholder font-FuturaMdBt w-[calc(100vw-2.5rem)] sm:w-full  mt-5 bg-white font-normal text-[#083F46] rounded-lg'
                             type="password"
                             id="password"
                             name="password"
                             value={confirmPassword}
                             onChange={handleRegConfirmPasswordChange}
-                            placeholder='confirm password'
+                            label='Re-enter password'
                             required
                         />
                         {passwordMismatchError && <p className=" text-red-500">{passwordMismatchError}</p>}
                     </div>
                     <div className='w-full mt-10 flex-col'>
-                        <button type="submit" className='hover:scale-105 font-FuturaMdBt w-fit h-fit pl-8 pr-8 py-1 text-lg font-medium text-white border-white border-2 rounded-3xl'>register</button>
+                        <Button  variant="outlined" type="submit" className=' border-[#252525] hover:border-blue-500 font-FuturaMdBt w-full h-fit pl-8 pr-8 py-1 text-[0.85rem] sm:text-lg  font-medium text-[#252525] hover:text-blue-500 border-2 '>register</Button>
 
                     </div>
                     {authenticateError && <p className=" text-red-500">{authenticateError}</p>}
 
                 </form>
                 <div className='mt-16'>
-                    <span onClick={toggleView} className=' cursor-pointer font-FuturaMdBt text-white text-xl font-medium underline underline-offset-2'>{'<'} Back to login</span>
+                    <span onClick={toggleView} className=' cursor-pointer font-FuturaMdBt text-[#252525] text-xl font-medium underline underline-offset-2'>{'<'} Back to login</span>
                 </div>
 
             </div>
