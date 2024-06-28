@@ -81,7 +81,7 @@ export default function Login({ toggleView }) {
       <div className=' w-fit h-fit text-[#252525] flex flex-col justify-start px-10 sm:px-0 items-start'>
         <span className=' font-FutuBd font-bold text-2xl'>Hi there,</span>
         <br />
-        <span className=' font-FuturaMdBt font-normal text-xl '>Welcome to our <br /> AI powered chat bot</span>
+        <span className=' font-FuturaMdBt font-normal text-xl '>Welcome to <br /> FalConverse-chat</span>
       </div>
       <div>
         <form onSubmit={handleSubmit} className=' w-full flex flex-col items-center ' >

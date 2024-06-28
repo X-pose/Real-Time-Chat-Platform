@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography'
 import Tooltip from '@mui/material/Tooltip'
 import { TextareaAutosize } from '@mui/base/TextareaAutosize'
 import { jwtDecode } from 'jwt-decode'
+import NavigationTabs from '../components/NavigationTabsComponent';
 
 
 const drawerWidth = 250;
@@ -207,8 +208,10 @@ function ChatPage() {
     return (
 
         <div className=" bg-gray-200 w-screen h-screen flex  items-center">
-
-            <Tooltip title="View chat history">
+            
+            <NavigationTabs/>
+            {/*
+                <Tooltip title="View chat history">
                 <IconButton
                     color="inherit"
                     aria-label="open drawer"
@@ -260,10 +263,13 @@ function ChatPage() {
                     {drawer}
                 </Drawer>
             </Box>
+            */
+            }
+            
 
 
             <div className='w-full  h-screen flex flex-col items-center justify-end'>
-                <div className=' my-5 font-FutuBd text-[#252525] w-full flex justify-center text-4xl  pb-2 '> <span className=' text-3xl sm:text-4xl'>SupportU.ai</span> </div>
+                
                 <MessageDsiplayComponent messages={messages} />
 
 
