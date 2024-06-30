@@ -8,6 +8,7 @@ import { MdGroups } from "react-icons/md"
 import { IoMdSettings } from "react-icons/io"
 import { FaSearch } from "react-icons/fa"
 import Tooltip from '@mui/material/Tooltip';
+import LogoutComponent from './LogoutComponent'
 
 
 function TabPanel(props) {
@@ -88,27 +89,31 @@ export default function NavigationTabs() {
                 </Tabs>
                 <TabPanel value={value} index={0}>
                     <div className=' w-72 h-full'>
-                        <p>Item One</p>
+                        <p>Chat list</p>
                     </div>
 
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <div className=' w-72 h-full'>
-                        <p>Item Two</p>
+                        <p>Group list</p>
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <div className=' w-72 h-full'>
-                        <p>Item Three</p>
+                        <p>Search</p>
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
                     <div className=' w-72 h-full'>
-                        <p>Item Four</p>
+                        <p>Settings</p>
                     </div>
                 </TabPanel>
 
             </Box>
+            <hr className=' w-full h-[2px] bg-gray-300' />
+            <div className=' flex justify-end py-3 px-5'>
+                <LogoutComponent/>
+            </div>
         </div>
 
     );
