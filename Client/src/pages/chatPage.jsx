@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
 import getSocket from '../utils/socketIoSingleton';
 import MessageDsiplayComponent from '../components/MessageDisplayComponent'
 import PastConversationsComponent from '../components/PastConversationsComponent'
@@ -28,6 +29,7 @@ function ChatPage() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
     const [isKeyPressed, setIsKeyPressed] = useState(false);
+    const [userData, setUserData] = useState('')
 
 
     //Drawer related functions
@@ -56,7 +58,7 @@ function ChatPage() {
     useEffect(() => {
 
         checkLoginState()
-
+        getUserData()
 
 
         socket.on('bot message', (botMsg) => {
@@ -69,6 +71,26 @@ function ChatPage() {
         }
     }, [])
 
+    const getUserData = async () => {
+
+
+        const token = localStorage.getItem('accessToken')
+
+        const decodedToken = jwtDecode(token)
+
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
+        await axios.get(`http://localhost:4000/api/auth/v1/${decodedToken.userId}`, config).then(res => {
+            setUserData(res.data)
+
+        }).catch(error => {
+            console.log(error)
+        })
+    }
 
 
 
@@ -209,7 +231,7 @@ function ChatPage() {
 
         <div className=" bg-gray-200 w-screen h-screen flex  items-center">
             
-            <NavigationTabs/>
+            <NavigationTabs userData={userData}/>
             {/*
                 <Tooltip title="View chat history">
                 <IconButton

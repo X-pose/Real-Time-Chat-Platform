@@ -23,6 +23,7 @@ exports.register = async (req, res) => {
     const newUser = {
 
         email: payload.email,
+        username:payload.username,
         password: await hashPasswordGen(payload.password),
         type: payload.type
     }
@@ -84,4 +85,16 @@ exports.login = async (req, res) => {
 
 
 
+}
+
+exports.getUserDetails = async(req,res) => {
+    const param = req.params.id;
+    console.log(param)
+    try {
+        const foundUser = await userModel.findById(param)
+        res.status(HttpStatus.OK).json(foundUser)
+
+    } catch (error) {
+        return res.status(HttpStatus.NOT_FOUND).json({ body: error })
+    }
 }

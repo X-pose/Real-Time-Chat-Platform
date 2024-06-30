@@ -9,6 +9,7 @@ import { IoMdSettings } from "react-icons/io"
 import { FaSearch } from "react-icons/fa"
 import Tooltip from '@mui/material/Tooltip';
 import LogoutComponent from './LogoutComponent'
+import SettingsComponent from './SettingsComponent';
 
 
 function TabPanel(props) {
@@ -44,7 +45,7 @@ function a11yProps(index) {
     };
 }
 
-export default function NavigationTabs() {
+export default function NavigationTabs({userData}) {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -104,8 +105,9 @@ export default function NavigationTabs() {
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <div className=' w-72 h-full'>
-                        <p>Settings</p>
+                    <div className=' flex justify-center w-72 h-full'>
+                      
+                        <SettingsComponent userData={userData}/>
                     </div>
                 </TabPanel>
 

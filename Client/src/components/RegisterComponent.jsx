@@ -14,6 +14,7 @@ export default function Registration({ toggleView }) {
     const navigate = useNavigate()
     //States
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [passwordError, setPasswordError] = useState('')
@@ -24,6 +25,10 @@ export default function Registration({ toggleView }) {
     //State change handlers
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
+    }
+
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value)
     }
 
     const handlePasswordChange = (e) => {
@@ -70,6 +75,7 @@ export default function Registration({ toggleView }) {
             //Send logic here.
             const payload = {
                 email: email,
+                username:username,
                 password: password
             }
 
@@ -109,6 +115,18 @@ export default function Registration({ toggleView }) {
                             value={email}
                             onChange={handleEmailChange}
                             label='Email'
+                            required
+                        />
+
+                    </div>
+                    <div className='w-full'>
+                        <TextField className=' placeholder-[#083F46] ::placeholder font-FuturaMdBt w-[calc(100vw-2.5rem)] sm:w-full  mt-5 bg-white font-normal text-[#083F46] rounded-lg'
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={username}
+                            onChange={handleUsernameChange}
+                            label='Username'
                             required
                         />
 

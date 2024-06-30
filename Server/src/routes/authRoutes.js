@@ -5,7 +5,7 @@
 //Requires
 const express = require('express')
 const router = express.Router()
-const { login, register } = require('../controllers/AuthController')
+const { login, register, getUserDetails } = require('../controllers/AuthController')
 
 //Route for login
 router.post('/v1/login', async (req, res) => {
@@ -15,6 +15,10 @@ router.post('/v1/login', async (req, res) => {
 router.post('/v1/register', async(req,res) => {
     await register(req,res)
 }) 
+
+router.get('/v1/:id', async(req,res) => {
+    await getUserDetails(req,res)
+})
 
 
 //Exporting router to be used by the app.js
